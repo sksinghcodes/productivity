@@ -21,7 +21,7 @@ html {
   }
 }
 
-:root:has(.theme-selector [value="light"]:checked) {
+:root:has(.theme-selector [value='light']:checked) {
   color-scheme: light;
   --base: #ffffff;
   --text: #000000;
@@ -30,7 +30,7 @@ html {
   --border-color: #0003;
 }
 
-:root:has(.theme-selector [value="dark"]:checked) {
+:root:has(.theme-selector [value='dark']:checked) {
   color-scheme: dark;
   --base: #212121;
   --text: #a6a6a6;
@@ -43,7 +43,7 @@ html {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 body {

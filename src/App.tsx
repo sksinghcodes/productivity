@@ -1,6 +1,6 @@
-import { FC, Fragment, useMemo, useState } from "react";
-import "./App.css";
-import data from "./data.json";
+import { FC, Fragment, useMemo, useState } from 'react';
+import './App.css';
+import data from './data.json';
 
 interface TaskIF {
   id: number | string;
@@ -126,34 +126,37 @@ const GroupTable: FC<{ taskGroups: TaskGroupsIF }> = ({ taskGroups }) => {
 };
 
 function App() {
-  const [view, setView] = useState("BY_TASK");
+  const [view, setView] = useState('BY_TASK');
   const tasks: TasksIF | TaskGroupsIF = useMemo(() => {
     const groupTasksByView: (tasks: TasksIF, view: string) => any = (
       tasks,
       view
     ) => {
-      const grouped: Record<string, { data: TaskIF[]; totalScore: number; maxScore: number }> = {};
+      const grouped: Record<
+        string,
+        { data: TaskIF[]; totalScore: number; maxScore: number }
+      > = {};
 
       tasks.forEach((task) => {
         const date = new Date(task.date);
-        let key:string;
+        let key: string;
 
         switch (view) {
-          case "DAILY":
-            key = date.toISOString().split("T")[0]; // YYYY-MM-DD
+          case 'DAILY':
+            key = date.toISOString().split('T')[0]; // YYYY-MM-DD
             break;
-          case "WEEKLY":
+          case 'WEEKLY':
             key = `${date.getFullYear()}-W${Math.ceil(date.getDate() / 7)}`; // YYYY-WX
             break;
-          case "MONTHLY":
+          case 'MONTHLY':
             key = `${date.getFullYear()}-${date.getMonth() + 1}`; // YYYY-M
             break;
-          case "QUARTERLY":
+          case 'QUARTERLY':
             key = `${date.getFullYear()}-Q${Math.ceil(
               (date.getMonth() + 1) / 3
             )}`; // YYYY-QX
             break;
-          case "YEARLY":
+          case 'YEARLY':
           default:
             key = `${date.getFullYear()}`; // YYYY
         }
@@ -176,9 +179,8 @@ function App() {
       }));
     };
 
-    return view === "BY_TASK" ? data : groupTasksByView(data, view);
+    return view === 'BY_TASK' ? data : groupTasksByView(data, view);
   }, [data, view]);
-
 
   console.log(tasks);
 
@@ -209,7 +211,7 @@ function App() {
 
         {/* Table Container */}
         <div className="table-container">
-          {view === "BY_TASK" ? (
+          {view === 'BY_TASK' ? (
             <TasksTable tasks={tasks as TasksIF} />
           ) : (
             <GroupTable taskGroups={tasks as TaskGroupsIF} />
